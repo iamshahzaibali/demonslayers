@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>The Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+#entry{
+    background-image: url("DemonSlayersLow.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+}
+    </style>
+</head>
+<body>
+    <!-- About Section -->
+    <div class="absolute top-0 w-[100vw] h-[100vh] hidden justify-center items-center" id="about_section">
+        <div class="w-[1200px] h-[730px] bg-[#00061c] rounded flex items-center justify-center">
+            <ol class="text-white text-3xl">
+                <li class="mb-4">1. Play to earn cash and unlock new characters in the shop.</li>
+                <li></li>
+                <li class="mb-4">2. Collect all characters to achieve victory.</li>
+                <li></li>
+                <li>3. Boost your earnings by playing the DOUBLE game and Ludo.</li>
+                <li class="mt-30 font-semibold">Disclaimer: This is a fan project, I do not own Demon Slayer</li>
+            </ol>
+        </div>
+        <div class="absolute bottom-0 left-2">
+            <div>
+                <button id="about_back" class="bg-[#1a1a46] text-white rounded w-[300px] h-[70px] text-3xl mb-3 cursor-pointer hover:bg-[#07072e]"> Back </button>
+            </div>  
+        </div>
+    </div> 
+    <!-- Pre Landing -->
+     <div class="w-[100vw] h-[100vh] z-[-10]" id="TheMainPoster">
+        <img src="DemonSlayers.png" alt="" class="w-[100vw] h-[100vh] brightness-30">
+     </div>
+
+    <div class="absolute top-0 w-[100vw] h-[100vh] flex justify-center items-center" id="post_spin">
+        <div class="w-[1200px] h-[730px] bg-[#00061c] rounded flex items-center justify-center">
+            <img src="#" alt="" class="w-[300px] h-[550px]" id="winner">
+        </div>
+    </div>    
+
+    <div class="absolute top-0 w-[100vw] h-[100vh] flex justify-center items-center" id="pre_landing">
+        <div class="w-[1200px] h-[730px] bg-[#00061c] rounded">
+            <div class="w-[1150px] h-[100%] flex flex-wrap">
+                
+                <div class="w-[220px] h-[350px] bg-[#400707] border-[2px] m-2" id="firstimage">
+                    <img src="kokushibo.png" alt="" class="w-[100%] h-[100%]">
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#400707] border-[2px] m-2" id="secondimage">
+                    <img src="Douma.png" alt="" class="w-[100%] h-[100%]">
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#810047] border-[2px] m-2" id="thirdimage">
+                    <img src="Gyokko.png" alt="" class="w-[100%] h-[100%]">
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#330062] border-[2px] m-2" id="fourthimage">
+                    <img src="Rui.png" alt="" class="w-[100%] h-[100%]">
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#0016688c] border-[2px] m-2 relative" id="fifthimage">
+                    <img src="pound.png" alt="" class="w-[100%] h-[100%]">
+                    <p class="absolute top-74 text-3xl text-white left-14">50,000$</p>
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#0016688c] border-[2px] m-2 relative" id="sixthimage">
+                    <img src="pound.png" alt="" class="w-[100%] h-[100%]">
+                    <p class="absolute top-74 text-3xl text-white left-13">100,000$</p>
+                </div>
+                <div class="w-[220px] h-[350px] bg-[#0016688c] border-[2px] m-2" id="seventhimage">
+                    <img src="murata.png" alt="" class="relative top-5">
+                </div>
+                <div class="w-[350px] h-[350px] m-2 flex items-end">
+                    <button id="btn001" class="bg-[#c0bfff] w-[350px] h-[100px] rounded-4xl text-5xl cursor-pointer hover:bg-[#8987f3] relative bottom-10 left-25 font-extrabold">Spin....</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Landing Page -->
+    <div class="w-[100vw] h-[100vh]" id="entry">
+        <div class="flex justify-center items-end h-[40vh] mb-3">
+            <div>
+                <button id="btn1" class="bg-[#560000] rounded-2xl w-[600px] h-[70px] text-3xl mb-3 cursor-pointer hover:bg-[#320000] text-white font-extrabold">Start Game</button>
+            </div>
+        </div>
+        <div class="flex justify-center items-start h-[60vh]">
+            <div class="m-2">
+                <button id="btn2" class="bg-[#560000] w-[300px] h-[70px] rounded-2xl text-3xl cursor-pointer hover:bg-[#320000] text-white font-extrabold">About</button>
+            </div>
+            <div class="m-2">
+                <button id="btn3" class="bg-[#560000] w-[300px] h-[70px] rounded-2xl text-3xl cursor-pointer hover:bg-[#320000] text-white font-extrabold">Music ON/OFF</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- The Game -->
+
+    <div id="alert-root"></div>
+
+    <div class="w-[100vw] h-[100vh] bg-[#242438] hidden" id="game-pg1">
+        <div class="flex justify-center">
+            <div class="w-[1900px] h-[100px] flex bg-[black] rounded text-white">
+                <div class="w-[500px] h-[100%] flex items-center">
+                    <p class="text-3xl ml-6 font-semibold">Total Cash: </p>
+                    <p class="text-3xl ml-1 transition-all 0.5s" id="total">10000</p>
+                    <p class="text-3xl">$</p>
+                </div>
+                <div class="w-[1390px] h-[100%] flex justify-end items-center">
+                    <button id="collection" class="bg-[red] h-[60px] pl-5 pr-5 rounded text-2xl cursor-pointer">My Collection</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-10">
+            <div class="w-[1900px] h-[600px] bg-[#101222] rounded text-white">
+                <div class="flex justify-center">
+                    <p class="text-3xl">Double Your Cash, Chances 50%</p>
+                </div>
+                <div class="w-[100%] flex justify-center items-center mt-20">
+                    <div>
+                        <button id="bet-50" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">50$</button>
+                    </div>
+                    <div>
+                        <button id="bet-100" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">100$</button>
+                    </div>
+                    <div>
+                        <button id="bet-150" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">150$</button>
+                    </div>
+                </div>
+
+                <div class="w-[100%] flex justify-center items-center">
+                    <div>
+                        <button id="bet-200" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">200$</button>
+                    </div>
+                    <div>
+                        <button id="bet-250" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">250$</button>
+                    </div>
+                    <div>
+                        <button id="bet-300" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">300$</button>
+                    </div>
+                </div>
+
+                <div class="w-[100%] flex justify-center items-center">
+                    <div>
+                        <button id="bet-350" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">350$</button>
+                    </div>
+                    <div>
+                        <button id="bet-400" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">400$</button>
+                    </div>
+                    <div>
+                        <button id="bet-450" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">450$</button>
+                    </div>
+                </div>
+
+                <div class="w-[100%] flex justify-center items-center">
+                    <div>
+                        <button id="bet-500" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">500$</button>
+                    </div>
+                    <div>
+                        <button id="bet-550" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">550$</button>
+                    </div>
+                    <div>
+                        <button id="bet-600" class="bg-[#009f7a] w-[300px] h-[70px] rounded text-3xl cursor-pointer hover:bg-[#09745b] m-3">600$</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 right-2">
+            <div>
+                <button id="shop" class="bg-[#1a1a46] text-white rounded w-[300px] h-[70px] text-3xl mb-3 cursor-pointer hover:bg-[#07072e]">Shop</button>
+            </div>  
+        </div>
+        <div class="absolute bottom-0 left-2">
+            <div>
+                <button id="main_menu" class="bg-[#1a1a46] text-white rounded w-[300px] h-[70px] text-3xl mb-3 cursor-pointer hover:bg-[#07072e]"> Main Menu </button>
+            </div>  
+        </div>
+    </div>
+
+
+    <div>
+        <audio src="goodresult.mp3" id="good_result_effect"></audio>
+    </div>
+    <div>
+        <audio src="spinning_sound.mp3" id="spinning_sound"></audio>
+    </div>
+    <div>
+         <audio id="music" src="light-of-the-void-mystical-orchestral-background-music-for-video-348318.mp3"></audio>
+    </div>
+    <div>
+        <audio id="punch" src="punch-foley_2-105980.mp3"></audio>
+    </div>
+    <div>
+        <audio id="entry_sound" src="EntrySound.mp3"></audio>
+    </div>
+
+    <script>
+        let btn1 = document.querySelector("#btn1");
+        // let btn2 = document.querySelector("#btn2");
+        let entry_page = document.querySelector("#entry");
+        let game_pg1 = document.querySelector("#game-pg1");
+
+        btn1.addEventListener("click", ()=>{
+            // entry_page.classList.remove("flex");
+            // entry_page.classList.add("hidden")
+            // game_pg1.classList.remove("hidden");
+            showAlert("Under Development – Thank You for Your Patience");
+        })
+
+        let bet_50 = document.querySelector("#bet-50")
+        let bet_100 = document.querySelector("#bet-100")
+        let bet_150 = document.querySelector("#bet-150")
+        let bet_200 = document.querySelector("#bet-200")
+        let bet_250 = document.querySelector("#bet-250")
+        let bet_300 = document.querySelector("#bet-300")
+        let bet_350 = document.querySelector("#bet-350")
+        let bet_400 = document.querySelector("#bet-400")
+        let bet_450 = document.querySelector("#bet-450")
+        let bet_500 = document.querySelector("#bet-500")
+        let bet_550 = document.querySelector("#bet-550")
+        let bet_600 = document.querySelector("#bet-600")
+
+        let total_amount = document.querySelector("#total")
+        let collection = document.querySelector("#collection");
+
+        // window.addEventListener("mousemove", ()=>{
+        //     let currentTotal = parseFloat(total.textContent) || 0;
+        //     if(currentTotal >= 1001){
+        //         upperlevels.classList.remove("bg-[red]");
+        //         upperlevels.classList.add("bg-[green]");
+        //     }
+        //     else{
+        //         upperlevels.classList.remove("bg-[green]");
+        //         upperlevels.classList.add("bg-[red]");
+        //     }
+        // })
+
+        collection.addEventListener("click", ()=>{
+            
+        })
+
+        bet_50.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 50){
+                
+                let bet_50_result = Math.random();
+                if(bet_50_result > 0.49999999){
+                    showAlert("Congratulations! You Won 50$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 50;
+                }
+                else{
+                    showAlert("Sorry! You Loss 50$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 50;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_100.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 100){
+                
+                let bet_100_result = Math.random();
+                if(bet_100_result > 0.49999999){
+                    showAlert("Congratulations! You Won 100$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 100;
+                }
+                else{
+                    showAlert("Sorry! You Loss 100$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 100;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_150.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 150){
+                
+                let bet_150_result = Math.random();
+                if(bet_150_result > 0.49999999){
+                    showAlert("Congratulations! You Won 150$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 150;
+                }
+                else{
+                    showAlert("Sorry! You Loss 150$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 150;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_200.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 200){
+                
+                let bet_200_result = Math.random();
+                if(bet_200_result > 0.49999999){
+                    showAlert("Congratulations! You Won 200$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 200;
+                }
+                else{
+                    showAlert("Sorry! You Loss 200$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 200;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_250.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 250){
+                
+                let bet_250_result = Math.random();
+                if(bet_250_result > 0.49999999){
+                    showAlert("Congratulations! You Won 250$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 250;
+                }
+                else{
+                    showAlert("Sorry! You Loss 250$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 250;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_300.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 300){
+                
+                let bet_300_result = Math.random();
+                if(bet_300_result > 0.49999999){
+                    showAlert("Congratulations! You Won 300$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 300;
+                }
+                else{
+                    showAlert("Sorry! You Loss 300$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 300;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_350.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 350){
+                
+                let bet_350_result = Math.random();
+                if(bet_350_result > 0.49999999){
+                    showAlert("Congratulations! You Won 350$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 350;
+                }
+                else{
+                    showAlert("Sorry! You Loss 350$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 350;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_400.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 400){
+                
+                let bet_400_result = Math.random();
+                if(bet_400_result > 0.49999999){
+                    showAlert("Congratulations! You Won 400$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 400;
+                }
+                else{
+                    showAlert("Sorry! You Loss 400$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 400;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_450.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 450){
+                
+                let bet_450_result = Math.random();
+                if(bet_450_result > 0.49999999){
+                    showAlert("Congratulations! You Won 450$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 450;
+                }
+                else{
+                    showAlert("Sorry! You Loss 450$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 450;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_500.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 500){
+                
+                let bet_500_result = Math.random();
+                if(bet_500_result > 0.49999999){
+                    showAlert("Congratulations! You Won 500$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 500;
+                }
+                else{
+                    showAlert("Sorry! You Loss 500$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 500;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_550.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 550){
+                
+                let bet_550_result = Math.random();
+                if(bet_550_result > 0.49999999){
+                    showAlert("Congratulations! You Won 550$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 550;
+                }
+                else{
+                    showAlert("Sorry! You Loss 550$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 550;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+
+        bet_600.addEventListener("click", ()=>{
+            let currentTotal = parseFloat(total.textContent) || 0;
+            if(currentTotal >= 600){
+                
+                let bet_600_result = Math.random();
+                if(bet_600_result > 0.49999999){
+                    showAlert("Congratulations! You Won 600$");
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal + 600;
+                }
+                else{
+                    showAlert("Sorry! You Loss 600$")
+                    let currentTotal = parseFloat(total.textContent) || 0;
+                    total.textContent = currentTotal - 600;
+                }
+
+            }
+            else{
+                showAlert("You do not have sufficient funds...")
+            }
+        })
+    // </script>
+    <script>
+        let btn3 = document.querySelector("#btn3");
+        let music = document.querySelector("#music")
+
+        btn3.addEventListener("click", ()=>{
+
+            if(music.hasAttribute('autoplay')){
+                music.removeAttribute('autoplay');
+                music.pause();
+            }
+            else{
+                music.setAttribute('autoplay', '');
+                music.play();
+            }
+        })
+    </script>
+    <!-- <script>
+        let btn2 = document.querySelector("#btn2");
+        btn2.addEventListener("click", ()=>{
+            setTimeout(()=>{
+                showAlert("Under Construction");
+            }, 300)
+        })
+    </script> -->
+    <script>
+        let spinbtn = document.querySelector("#btn001");
+        let img1 = document.querySelector("#firstimage");
+        let img2 = document.querySelector("#secondimage");
+        let img3 = document.querySelector("#thirdimage");
+        let img4 = document.querySelector("#fourthimage");
+        let img5 = document.querySelector("#fifthimage");
+        let img6 = document.querySelector("#sixthimage");
+        let img7 = document.querySelector("#seventhimage");
+        let tokens = 1;
+        let pre_landing = document.querySelector("#pre_landing");
+        let winner = document.querySelector("#winner");
+        let post_spin = document.querySelector("#post_spin");
+        let spin_sound = document.querySelector("#spinning_sound");
+        let good_result = document.querySelector("#good_result_effect");
+        let TheMainPoster = document.querySelector("#TheMainPoster");
+        let EntrySound = document.querySelector("entry_sound");
+        spinbtn.addEventListener("click", ()=>{
+            if(tokens >= 1){
+                 if(spin_sound.hasAttribute('autoplay')){
+                    spin_sound.removeAttribute('autoplay');
+                    spin_sound.pause();
+                }
+                else{
+                    spin_sound.setAttribute('autoplay', '');
+                    spin_sound.play();
+                }   
+
+                spinbtn.style.background = "red";
+                tokens -= 1;
+
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(40%)";
+                }, 0);
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(100%)";
+                }, 100);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(40%)";
+                }, 150);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(100%)";
+                }, 250);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(40%)";
+                }, 300);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(100%)";
+                }, 400);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(40%)";
+                }, 450);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(100%)";
+                }, 550);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(40%)";
+                }, 600);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(100%)";
+                }, 700);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(40%)";
+                }, 750);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(100%)";
+                }, 850);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(40%)";
+                }, 900);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(100%)";
+                }, 1000);
+
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(40%)";
+                }, 1050);
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(100%)";
+                }, 1150);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(40%)";
+                }, 1200);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(100%)";
+                }, 1300);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(40%)";
+                }, 1350);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(100%)";
+                }, 1450);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(40%)";
+                }, 1500);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(100%)";
+                }, 1600);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(40%)";
+                }, 1650);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(100%)";
+                }, 1750);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(40%)";
+                }, 1800);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(100%)";
+                }, 1900);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(40%)";
+                }, 1950);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(100%)";
+                }, 2050);
+
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(40%)";
+                }, 2100);
+                setTimeout(()=>{
+                    img1.style.filter = "brightness(100%)";
+                }, 2200);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(40%)";
+                }, 2250);
+                setTimeout(()=>{
+                    img2.style.filter = "brightness(100%)";
+                }, 2350);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(40%)";
+                }, 2400);
+                setTimeout(()=>{
+                    img3.style.filter = "brightness(100%)";
+                }, 2500);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(40%)";
+                }, 2550);
+                setTimeout(()=>{
+                    img4.style.filter = "brightness(100%)";
+                }, 2650);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(40%)";
+                }, 2700);
+                setTimeout(()=>{
+                    img5.style.filter = "brightness(100%)";
+                }, 2800);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(40%)";
+                }, 2850);
+                setTimeout(()=>{
+                    img6.style.filter = "brightness(100%)";
+                }, 2950);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(40%)";
+                }, 3000);
+                setTimeout(()=>{
+                    img7.style.filter = "brightness(100%)";
+                }, 3100);
+
+                setTimeout(()=>{
+
+                    if(good_result.hasAttribute('autoplay')){
+                        good_result.removeAttribute('autoplay');
+                        good_result.pause();
+                    }
+                    else{
+                        good_result.setAttribute('autoplay', '');
+                        good_result.play();
+                    }
+
+                    pre_landing.classList.remove("flex");
+                    pre_landing.classList.add("hidden");
+                    let spin_result = Math.ceil(Math.random() * 100);
+
+                    if(spin_result <= 20){
+                        winner.src = "pound.png";
+                        console.log(spin_result);
+                        showAlert("You won 50,000$");
+                        let currentTotal = parseFloat(total.textContent) || 0;
+                        total.textContent = currentTotal + 50000;
+                    }
+                    else if(spin_result > 20 && spin_result <= 60){
+                        winner.src = "murata.png";
+                        console.log(spin_result);
+                        showAlert("You unlocked Murata");
+                    }
+                    else if(spin_result > 60 && spin_result <= 90){
+                        winner.src = "pound.png";
+                        console.log(spin_result);
+                        showAlert("You won 100,000$");
+                        let currentTotal = parseFloat(total.textContent) || 0;
+                        total.textContent = currentTotal + 100000;
+                    }
+                    else if(spin_result > 90 && spin_result <= 94){
+                        winner.src = "rui.png";
+                        console.log(spin_result);
+                        showAlert("You unlocked Rui");
+                    }
+                    else if(spin_result > 94 && spin_result <= 97){
+                        winner.src = "gyokko.png"
+                        console.log(spin_result);
+                        showAlert("You unlocked Gyokko");
+                    }
+                    else if(spin_result > 97 && spin_result <= 99){
+                        winner.src = "Douma.png"
+                        console.log(spin_result);
+                        showAlert("You unlocked Douma");
+                    }
+                    else if(spin_result < 99){
+                        winner.src = "kokushibo.png"
+                        console.log(spin_result);
+                        showAlert("You unlocked Douma");
+                    }
+                },3200);
+
+                setTimeout(()=>{
+                    post_spin.classList.remove("flex");
+                    post_spin.classList.add("hidden");
+                }, 6500)
+
+                setTimeout(()=>{
+                    TheMainPoster.classList.add("hidden")
+                }, 6500);
+            }
+            else{
+                showAlert("No more spins");
+            }
+        })
+
+
+        setTimeout(()=>{
+            spinbtn.style.background = "#8987f3"
+        }, 3500);
+    </script>
+    <script>
+        let main_menu = document.querySelector("#main_menu");
+        let shop = document.querySelector("#shop");
+
+        main_menu.addEventListener("click", ()=>{
+            game_pg1.classList.remove("flex");
+            game_pg1.classList.add("hidden");
+            entry_page.classList.remove("hidden");
+            entry_page.classList.add("block");
+        })
+    </script>
+    <script>
+        setTimeout(()=>{
+            pre_landing.classList.add("hidden");
+            post_spin.classList.add("hidden");
+        }, 0);
+
+        setTimeout(()=>{
+            pre_landing.classList.remove("hidden");
+            post_spin.classList.remove("hidden");
+        }, 2000);
+
+    </script>
+    <script>
+        let about = document.querySelector("#about_section");
+        let btn2 = document.querySelector("#btn2");
+        let about_back = document.querySelector("#about_back")
+        btn2.addEventListener("click", ()=>{
+            about.classList.remove("hidden");
+            about.classList.add("flex");
+        })
+        about_back.addEventListener("click", ()=>{
+            about.classList.remove("flex");
+            about.classList.add("hidden");
+        })
+    </script>
+    <script src="alert.js"></script>
+</body>
+</html>
